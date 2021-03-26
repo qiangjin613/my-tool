@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!-- 1.配置 JDBC 驱动的地址(需要改为自己jar包的位置) -->
+    <classPathEntry location="F:\jars\mysql-connector-java-5.1.6.jar" />
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <!-- 如果有相同名的 .xml 文件，默认追加在该文件后面。使用此插件，可在重新生成相应的 .xml 时，不再给相应的 .xml 追加内容 -->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
+
+        <!-- 当 suppressAllComments 为 true 时，不为生成的文件添加注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!-- 2.配置 JDBC 连接属性，其中 driverClass 中要与 mysql-connector 版本一致 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://host:port/bname?characterEncoding=utf-8"
+                        userId="username"
+                        password="password">
+        </jdbcConnection>
+
+        <!-- java类型处理器
+            用于处理DB中的类型到Java中的类型，默认使用JavaTypeResolverDefaultImpl；
+            注意一点，默认会先尝试使用Integer，Long，Short等来对应DECIMAL和 NUMERIC数据类型；
+        -->
+        <javaTypeResolver >
+            <!--
+                true：使用BigDecimal对应DECIMAL和 NUMERIC数据类型
+                false：默认,
+                    scale>0;length>18：使用BigDecimal;
+                    scale=0;length[10,18]：使用Long；
+                    scale=0;length[5,9]：使用Integer；
+                    scale=0;length<5：使用Short；
+             -->
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!-- 3.实体类pojo的包路径 -->
+        <javaModelGenerator targetPackage="org.qiangjin.mytool.pojo" targetProject="src/main/java">
+            <!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
+            <property name="enableSubPackages" value="true" />
+            <!-- 设置是否在getter方法中，对String类型字段调用trim()方法 -->
+            <!-- trimStrings，指当字段为 String 时，使用 trim() 方法进行处理，但使用lombok插件（@Data注解）就可以解决了
+            <property name="trimStrings" value="true"/> -->
+        </javaModelGenerator>
+
+        <!-- 4.mapper.xml 文件路径 -->
+        <sqlMapGenerator targetPackage="mappers"  targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <!-- 5.dao下的 mapper 接口路径 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="org.qiangjin.mytool.dao"  targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <!-- 6.要生成的表的名字 -->
+        <!--
+            1)tableName，数据库中的表名
+            2)domainObjectName，指定生成的文件名称
+            3)enableXXXX，用于指定是否生成相关的方法。如：enableCountByExample 为 true 时，会自动生成 CountByExample()
+        -->
+<!--        <table tableName="mall_order" domainObjectName="Order" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>-->
+<!--        <table tableName="mall_order_item" domainObjectName="OrderItem" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>-->
+<!--        <table tableName="mall_user" domainObjectName="User" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>-->
+<!--        <table tableName="mall_category" domainObjectName="Category" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>-->
+<!--        <table tableName="mall_product" domainObjectName="Product" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">-->
+<!--            <columnOverride column="detail" jdbcType="VARCHAR" />-->
+<!--            <columnOverride column="sub_images" jdbcType="VARCHAR" />-->
+<!--        </table>-->
+        <table tableName="tableName" domainObjectName="domainObjectName" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+    </context>
+</generatorConfiguration>
