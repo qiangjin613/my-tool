@@ -10,3 +10,8 @@ idea右边导航栏的“Maven”按钮 --> my-tool --> Plugins --> mybatis-gene
 ```
 mvn mybatis-generator:generate
 ```
+
+### 工具类
+|  类名   | 功能  |
+|  ----  | ----  |
+| IpConvert  | ipv4 与 int 的相互转换 |
