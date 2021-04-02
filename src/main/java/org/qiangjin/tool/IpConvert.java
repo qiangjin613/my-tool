@@ -40,9 +40,9 @@ public class IpConvert {
     }
 
     public static void main(String[] args) {
-        System.out.println(convert("0.0.0.0")); // input: 0
+        System.out.println(convert("0.0.0.0")); // output: 0
         System.out.println(convert(0));
-        System.out.println("------------------------------"); // input: -1
+        System.out.println("------------------------------"); // output: -1
         System.out.println(convert("255.255.255.255"));
         System.out.println(convert(-1));
         System.out.println("------------------------------");
